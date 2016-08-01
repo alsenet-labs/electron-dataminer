@@ -193,7 +193,7 @@ To clone and run this repository you'll need the following installed on your com
 From the command line:
 ```bash
 # Clone this repository
-git clone https://github.com/alsenet/electron-dataminer
+git clone https://github.com/alsenet-labs/electron-dataminer
 # Go into the repository
 cd electron-dataminer
 # Install dependencies and run the test app

@@ -1,6 +1,6 @@
 {
   "name": "electron-dataminer-example",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Example using existing page and api modules",
   "main": "index.js",
   "scripts": {
