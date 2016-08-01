@@ -247,7 +247,8 @@ npm i && bower i && npm start
 
 ## Quickstart
 
-You can either use the Example directory 
+You can either use the example or test directories as starting point or begin a new project with eg:
+
 ```bash
 mkdir newProject
 cd newProject
@@ -256,7 +257,21 @@ npm install --save electron-dataminer
 echo "var edm=require('electron-dataminer');" > index.js
 ```
 
-Learn more about electron-dataminer in [test/config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) and [test/page/my-page.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js)
+Then create an index.html with a div#webview
+```<div id="webview" />```
+
+And require jquery and electron-dataminer/renderer.js, eg:
+```
+<script>
+window.jQuery=window.$=require('./bower_components/jquery/dist/jquery.js');
+require(path.join(process.cwd(),'node_modules','electron-dataminer','renderer.js'));
+</script>
+```
+
+Finally you can write your configuration file eg [config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) then test your application with ```npm start [<path to config.js>]```
+
+
+Learn more about electron-dataminer usage in [test/config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) and [test/page/my-page.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js)
 
 Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
 
