@@ -1,19 +1,10 @@
 {
   "name": "electron-dataminer-example",
-  "version": "1.0.1",
-  "description": "Example using existing page and api modules",
+  "description": "Example using existing page and api modules. NOT TO BE PUBLISHED ON NPM.",
   "main": "index.js",
   "scripts": {
     "start": "electron index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alsenet-labs/electron-dataminer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alsenet-labs/electron-dataminer/issues"
-  },
-  "homepage": "https://github.com/alsenet-labs/electron-dataminer#readme",
   "author": "Rurik Bogdanov <rurik.bugdanov@alsenet.com>",
   "license": "AGPL-3.0",
   "dependencies": {

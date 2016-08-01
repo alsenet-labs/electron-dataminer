@@ -1,4 +1,3 @@
-
 var config={
 
   // Show chrome developer tools for main window
@@ -23,30 +22,23 @@ var config={
 
       // The pageClass module name for this webview
       // (will be stored in config.pageClass['my-page'])
-      pageClass: 'mypage',
+      pageClass: 'example-page',
 
       /*
        For example if you declare:
          pageClass: 'mypage',
-
        then electron-dataminer will try to load:
          1. A module named __dirname/page/mypage.js (see electron-dataminer-test/page/my-page.js)
          2. A module named electron-dataminer-mypage (see package electron-dataminer-mypage)
          3. A module named mypage (figure it out)
+       the module should export a function returning the module exports (see page/my-page.js below)
 
-       the module should export a function returning the module exports like below:
-         module.exports=function(electron,config){
-           return {
-             whatever: true
-           }
-         }
-
-       The same rules apply for the "api" module for the webview defined below
+       The same rules apply for the "my-api" module declared below
       */
 
       // The api module name for this webview
       // (will be stored in config.api['my-api'])
-      api: 'myapi',
+      api: 'example-api',
 
       // The url to load in the webview
       // (Can be overriden by the pageClass or api module with the value
@@ -56,10 +48,8 @@ var config={
        When the url above is loaded in the webview, the webview process will send
        a 'processPage' event to the renderer process which can be
        handled in the pageClass or/and api module (module.exports.ipcEvents.processPage)
-
        Code specific to a page class may override code specific to the type of data to mine,
        so the event handler for the page is called first.
-
       */
 
       devTools: true,

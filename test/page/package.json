@@ -2,14 +2,6 @@
   "author": {
     "name": "Rurik Bogdanov <rurik.bugdanov@alsenet.com>"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alsenet-labs/electron-dataminer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alsenet-labs/electron-dataminer/issues"
-  },
-  "homepage": "https://github.com/alsenet-labs/electron-dataminer#readme",
   "dependencies": {},
   "description": "Example page module",
   "devDependencies": {},
@@ -19,5 +11,5 @@
   "name": "electron-dataminer-example-page",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
-  "version": "1.0.2"
+  "version": "1.0.4"
 }

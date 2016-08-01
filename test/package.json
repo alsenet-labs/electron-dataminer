@@ -2,14 +2,6 @@
   "author": {
     "name": "Rurik Bogdanov <rurik.bugdanov@alsenet.com>"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alsenet-labs/electron-dataminer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/alsenet-labs/electron-dataminer/issues"
-  },
-  "homepage": "https://github.com/alsenet-labs/electron-dataminer#readme",
   "dependencies": {
     "electron-dataminer": "^1.2.0"
   },
@@ -24,5 +16,5 @@
   "scripts": {
     "start": "electron index.js"
   },
-  "version": "1.0.4"
+  "version": "1.0.6"
 }
