@@ -17,9 +17,9 @@ You can define event handlers at those three levels, either directly in the conf
 
 file, or (preferred) in a separate module.
 
-You will place the module to navigate in a given website in the "page" directory,
+You will specify the module used to navigate in a given website with the config.webviews[name].pageClass property (see config.js below)
 
-You will place the module for data extraction the "api" directory
+You will specify the module used for data extraction with the config.webviews[name].api property (see config.js below)
 
 Example:
 
@@ -39,24 +39,45 @@ var config={
     height: '100%'
   },
 
+  url: `file://${__dirname}/index.html`,
+
   // Configure webviews
   webviews: {
 
     // The webview DOM element id
-    webview1: {
+    webview1:  {
 
-      // The pageClass module name
+      // The pageClass module name for this webview
       // (will be stored in config.pageClass['my-page'])
       pageClass: 'my-page',
 
-      // The api module name
+      /*
+       For example if you declare:
+         pageClass: 'mypage',
+       then electron-dataminer will try to load:
+         1. A module named __dirname/page/mypage.js (see electron-dataminer-test/page/my-page.js)
+         2. A module named electron-dataminer-mypage (see package electron-dataminer-mypage)
+         3. A module named mypage (figure it out)
+       the module should export a function returning the module exports (see page/my-page.js below)
+          
+       The same rules apply for the "my-api" module declared below
+      */
+
+      // The api module name for this webview
       // (will be stored in config.api['my-api'])
       api: 'my-api',
 
-      // When the url below is loaded, the webview process will send
-      // a 'processPage' event to the renderer process which can be
-      // handled in the pageClass or/and api module (module.exports.ipcEvents.processPage)
-      url: 'http://my-url.com/index.html',
+      // The url to load in the webview
+      // (Can be overriden by the pageClass or api module with the value
+      // returned by optional function <module>.renderer.loadURL())
+      url: 'http://fsf.org',
+      /*
+       When the url above is loaded in the webview, the webview process will send
+       a 'processPage' event to the renderer process which can be
+       handled in the pageClass or/and api module (module.exports.ipcEvents.processPage)
+       Code specific to a page class may override code specific to the type of data to mine,
+       so the event handler for the page is called first.
+      */
 
       devTools: true,
 
@@ -65,26 +86,28 @@ var config={
         // see https://github.com/electron/electron/blob/master/docs/api/web-contents.md#webcontentsloadurlurl-options
       }
 
-      // You can add here any other option specific to the pageClass or the api
+      // You can add here any other option specific to this webview to be used
+      // by the pageClass or the api modules
 
-    },
-    webview2: {
-      ...
     }
   },
 
-/*
   api: {
     // api modules specified in the webview options will be stored here.
     // You could require (but should not define) apis here
+    // eg with:
+    //  'my-api': require('electron-dataminer-test')(global.electron,config,'my-api','api')
+
   },
 
   pageClass: {
     // pageClass modules specified in the webview options will be stored here.
     // You could require (but should not define) page classes here
   }
-*/
+
 }
+
+module.exports=config;
 ```
 
 page/my-page.js:
@@ -180,7 +203,7 @@ To clone and run this repository you'll need the following installed on your com
 * [Git](https://git-scm.com)
 * [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com))
 
-  I recommend using [nvm](https://github.com/creationix/nvm) to install/upgrade nodejs along with installed npm packages without hassle.
+  I recommend using [nvm](https://github.com/creationix/nvm) to install/upgrade nodejs along with installed npm packages without hassle and so that "global" packages can be installed at the user level without administrator privileges.
 
   Also, after installing nodejs, install npm v3 with ```npm install -g npm``` for deeper better and slower dependencies checking (put ```progress=false``` in ~/.npmrc for less slower operation)
 
@@ -190,6 +213,10 @@ To clone and run this repository you'll need the following installed on your com
 
   IMPORTANT: never use ```sudo``` to install npm packages since package installation scripts (and their dependencies) can run any code with the permissions of the current user. Paranoid users should even use a secondary user account or a virtual machine for working with node and npm.
 
+## Test
+
+For developing or testing purpose you can clone the electron-dataminer project and add a subdirectory for your configuration, eg ./test. In this directory you can put your config.js (see test/config.js or example/config.js) and add your pageClass or api modules (scripts) in folders ./test/api/ and ./test/page/
+
 From the command line:
 ```bash
 # Clone this repository
@@ -197,8 +224,18 @@ git clone https://github.com/alsenet-labs/electron-dataminer
 # Go into the repository
 cd electron-dataminer
 # Install dependencies and run the test app
-npm install && bower install && npm start test/config.js
+cd test && npm install && bower install && cd ..
+npm i && bower i && npm start test/config.js
 ```
+
+## Example
+Look at the [example package](https://github.com/alsenet-labs/electron-dataminer/blob/master/example if you want to develop or share reusable pageClass or api modules for electron-dataminer
+
+```bash
+cd example
+npm i && bower i && npm start
+```
+
 Learn more about electron-dataminer in [test/config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) and [test/page/my-page.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js)
 
 Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
