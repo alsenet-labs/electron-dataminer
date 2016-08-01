@@ -17,9 +17,9 @@ You can define event handlers at those three levels, either directly in the conf
 
 file, or (preferred) in a separate module.
 
-You will place the module to navigate in a given website in the "page" directory,
+You will specify the module used to navigate in a given website with the config.webviews[name].pageClass property (see config.js below)
 
-You will place the module for data extraction the "api" directory
+You will specify the module used for data extraction with the config.webviews[name].api property (see config.js below)
 
 Example:
 
