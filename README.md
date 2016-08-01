@@ -58,13 +58,9 @@ var config={
          1. A module named __dirname/page/mypage.js (see electron-dataminer-test/page/my-page.js)
          2. A module named electron-dataminer-mypage (see package electron-dataminer-mypage)
          3. A module named mypage (figure it out)
-       the module should export a function returning the module exports like below:
-         module.exports=function(electron,config){
-           return {
-             whatever: true
-           }
-         }
-       The same rules apply for the "api" module for the webview defined below
+       the module should export a function returning the module exports (see page/my-page.js below)
+          
+       The same rules apply for the "my-api" module declared below
       */
 
       // The api module name for this webview
