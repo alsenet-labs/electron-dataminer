@@ -1,0 +1,21 @@
+{
+  "name": "electron-dataminer-example",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Rurik Bogdanov <rurik.bugdanov@alsenet.com>"
+    
+  ],
+  "license": "AGPL-3.0",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}

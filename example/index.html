@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- bower:css -->
+    <!-- endbower -->
+    <style>
+
+html, body, #webviews {
+  width: 100%;
+  height: 100%;
+}
+
+webview {
+  width: 100%;
+  height: 100%;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="webviews"></div>
+
+  </body>
+  <script>
+    window.jQuery=window.$=require('./bower_components/jquery/dist/jquery.js');
+
+  </script>
+  <!-- bower:js -->
+  <!-- endbower -->
+
+  <script>
+    require('./node_modules/electron-dataminer/renderer.js');
+  </script>
+
+</html>

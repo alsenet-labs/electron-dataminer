@@ -1,0 +1,29 @@
+{
+  "name": "electron-dataminer",
+  "version": "1.2.0",
+  "description": "Extract data from internet using reusable modules ",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "test": "npm start test/config.js"
+  },
+  "keywords": [
+    "data",
+    "mining",
+    "miner",
+    "electron"
+  ],
+  "author": "Rurik Bogdanov",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsenet-labs/electron-dataminer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alsenet-labs/electron-dataminer/issues"
+  },
+  "homepage": "https://github.com/alsenet-labs/electron-dataminer#readme",
+  "dependencies": {
+    "console-redirect": "^1.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "electron-dataminer-test",
+  "main": "index.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4"
+  }
+}

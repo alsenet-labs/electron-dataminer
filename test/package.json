@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "Rurik Bogdanov <rurik.bugdanov@alsenet.com>"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsenet-labs/electron-dataminer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alsenet-labs/electron-dataminer/issues"
+  },
+  "homepage": "https://github.com/alsenet-labs/electron-dataminer#readme",
+  "dependencies": {},
+  "description": "Example electron-dataminer application",
+  "devDependencies": {},
+  "directories": {},
+  "license": "AGPL-3.0",
+  "main": "index.js",
+  "name": "electron-dataminer-test",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "start": "electron index.js"
+  },
+  "version": "1.0.3"
+}
