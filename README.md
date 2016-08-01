@@ -213,6 +213,10 @@ To clone and run this repository you'll need the following installed on your com
 
   IMPORTANT: never use ```sudo``` to install npm packages since package installation scripts (and their dependencies) can run any code with the permissions of the current user. Paranoid users should even use a secondary user account or a virtual machine for working with node and npm.
 
+## Test
+
+For developing or testing purpose you can clone the electron-dataminer project and add a subdirectory for your configuration, eg ./test. In this directory you can put your config.js (see test/config.js or example/config.js) and add your pageClass or api modules (scripts) in folders ./test/api/ and ./test/page/
+
 From the command line:
 ```bash
 # Clone this repository
@@ -221,8 +225,17 @@ git clone https://github.com/alsenet-labs/electron-dataminer
 cd electron-dataminer
 # Install dependencies and run the test app
 cd test && npm install && bower install && cd ..
-npm install && bower install && npm start test/config.js
+npm i && bower i && npm start test/config.js
 ```
+
+## Example
+Look at the [example package](https://github.com/alsenet-labs/electron-dataminer/blob/master/example if you want to develop or share reusable pageClass or api modules for electron-dataminer
+
+```bash
+cd example
+npm i && bower i && npm start
+```
+
 Learn more about electron-dataminer in [test/config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) and [test/page/my-page.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js)
 
 Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
