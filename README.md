@@ -55,8 +55,8 @@ var config={
        For example if you declare:
          pageClass: 'mypage',
        then electron-dataminer will try to load:
-         1. A module named __dirname/page/mypage.js (see electron-dataminer-test/page/my-page.js)
-         2. A module named electron-dataminer-mypage (see package electron-dataminer-mypage)
+         1. A module named __dirname/page/mypage.js (see electron-dataminer/test/page/my-page.js)
+         2. A module named electron-dataminer-mypage (see npm package electron-dataminer-mypage in electron-dataminer/test/page/)
          3. A module named mypage (figure it out)
        the module should export a function returning the module exports (see page/my-page.js below)
           
@@ -217,7 +217,9 @@ To clone and run this repository you'll need the following installed on your com
 
 For developing or testing purpose you can clone the electron-dataminer project and add a subdirectory for your configuration, eg ./test. In this directory you can put your config.js (see test/config.js or example/config.js) and add your pageClass or api modules (scripts) in folders ./test/api/ and ./test/page/
 
-From the command line:
+Then you can run your code from the project root folder with eg: ```npm start ./test/config.js```
+
+To run the test from the command line:
 ```bash
 # Clone this repository
 git clone https://github.com/alsenet-labs/electron-dataminer
@@ -228,12 +230,30 @@ cd test && npm install && bower install && cd ..
 npm i && bower i && npm start test/config.js
 ```
 
+You can also use the test directory structure for standalone project if you add electron-dataminer as a dependency in package.json with ```npm install --save electron-dataminer```
+
+
 ## Example
-Look at the [example package](https://github.com/alsenet-labs/electron-dataminer/blob/master/example if you want to develop or share reusable pageClass or api modules for electron-dataminer
+Look at the [example package](https://github.com/alsenet-labs/electron-dataminer/blob/master/example) structure if you intend to develop or share reusable pageClass or api modules for electron-dataminer.
+
+Instead of using the ./api and ./page directories to store pageClass and api modules like in the [test directory](https://github.com/bugdanov/electron-dataminer/blob/master/test/) , you have to create separate npm packages for each pageClass or api modules (eg: [electron-dataminer-example-page](https://github.com/bugdanov/electron-dataminer/blob/master/test/page) or [electron-dataminer-example-api](https://github.com/bugdanov/electron-dataminer/blob/master/test/api))
+
+At this time you can specify only one module of each class per webview, but a module could require another one(s)
 
 ```bash
 cd example
 npm i && bower i && npm start
+```
+
+## Quickstart
+
+You can either use the Example directory 
+```bash
+mkdir newProject
+cd newProject
+npm init .
+npm install --save electron-dataminer
+echo "var edm=require('electron-dataminer');" > index.js
 ```
 
 Learn more about electron-dataminer in [test/config.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js) and [test/page/my-page.js](https://github.com/alsenet-labs/electron-dataminer/blob/master/test/config.js)
