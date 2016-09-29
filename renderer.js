@@ -60,11 +60,15 @@ var ipcRenderer=electron.ipcRenderer;
 // create webviews defined in config.js
 function webviews_init() {
   for(id in config.webviews) {
+    var wvo=config.webviews[id];
     var container=document.getElementById('webviews');
     // create webview element
     var webview=document.createElement('webview');
     // set attributes
     webview.id=id;
+    for (var name in wvo.attr) {
+      $(webview).attr(name,wvo.attr[name]);
+    }
     $(webview).attr('preload',path.join(__dirname,'webview.js'));
     webview.src="about:blank";
     // add webview to container

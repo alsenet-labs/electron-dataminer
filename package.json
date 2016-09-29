@@ -1,6 +1,6 @@
 {
   "name": "electron-dataminer",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Extract data from internet using reusable modules ",
   "main": "main.js",
   "scripts": {

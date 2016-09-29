@@ -20,6 +20,11 @@ var config={
     // The webview DOM element id
     webview1:  {
 
+      // you can set optional webview attributes below eg:
+      attr: {
+//        partition: 'persist:webview1'
+      },
+
       // The pageClass module name for this webview
       // (will be stored in config.pageClass['my-page'])
       pageClass: 'example-page',
