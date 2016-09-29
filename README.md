@@ -142,13 +142,26 @@ module.exports=function(electron){
         var someVariable='initialized';
       },
 
-      // electrion.ipcMain event handlers for the main process
+      // electron.ipcMain event handlers for the main process
       // that you will probably trigger from the renderer process
       // using electron.ipcRenderer
       ipcEvents: {
 
-        ping: function ping(){
+        ping: function ping(event,options){
           console.log('received: ping');
+
+          // electron and config are passed to require('section.js') in main.js
+          // and available here
+          var electron=options.electron;
+          var config=options.config;
+
+          // Arguments passed from the renderer in the 
+          // electron.ipcRenderer.send('ping',...) call below
+          // are received in options.args
+
+          if (options.args[0]=='hello') {
+            console.log('hello');
+          }
           console.log(someVariable);
           setTimeout(function(){
             global.mainWindow.webContents.send('nextPage');
@@ -172,7 +185,7 @@ module.exports=function(electron){
         'processPage': function renderer_processPage(){
           // trigger a 'ping' event for the main process
           console.log('send: ping');
-          electron.ipcRenderer.send('ping');
+          electron.ipcRenderer.send('ping','hello');
         },
 
         'nextPage': function renderer_nextPage(){
