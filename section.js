@@ -77,6 +77,14 @@ module.exports=function(config,sectionType,data){
               (function(eventName){
                 bind.call(target,eventName,function(event){
                   var args=Array.prototype.slice.call(arguments,1);
+                  if (options.data) {
+                    options.data.args=args;
+                  } else {
+                    if (!data) {
+                      data={};
+                    }
+                    data.args=args;
+                  }
                   return eventHandlers[eventName].apply(context||target,[event,options.data||data]);
                 });
               })(eventName);
