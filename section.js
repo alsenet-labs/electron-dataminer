@@ -72,9 +72,8 @@ module.exports=function(config,sectionType,data){
           if (section && section[sectionType] && section[sectionType][eventClass]) {
             var eventHandlers=section[sectionType][eventClass];
             for(var eventName in eventHandlers) {
-              console.log('bind',eventName,'to',target);
-              var bind=target.on||target.addEventListener;
-              (function(eventName){
+              var bind=target.addListener||target.addEventListener||target.on;
+              (function(eventName,eventHandlers){
                 bind.call(target,eventName,function(event){
                   var args=Array.prototype.slice.call(arguments,1);
                   if (options.data) {
@@ -87,7 +86,7 @@ module.exports=function(config,sectionType,data){
                   }
                   return eventHandlers[eventName].apply(context||target,[event,options.data||data]);
                 });
-              })(eventName);
+              })(eventName,eventHandlers);
             }
           }
         }
