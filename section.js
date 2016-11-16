@@ -73,9 +73,12 @@ module.exports=function(config,sectionType,data){
             var eventHandlers=section[sectionType][eventClass];
             for(var eventName in eventHandlers) {
               var bind=target.addListener||target.addEventListener||target.on;
-              (function(eventName,eventHandlers){
+              (function(sectionId,options,target,context,eventName,eventHandlers){
                 bind.call(target,eventName,function(event){
                   var args=Array.prototype.slice.call(arguments,1);
+                  if (args[0][sectionName]!=sectionId) {
+                    return true;
+                  }
                   if (options.data) {
                     options.data.args=args;
                   } else {
@@ -86,7 +89,7 @@ module.exports=function(config,sectionType,data){
                   }
                   return eventHandlers[eventName].apply(context||target,[event,options.data||data]);
                 });
-              })(eventName,eventHandlers);
+              })(sectionId,options,target,context,eventName,eventHandlers);
             }
           }
         }
