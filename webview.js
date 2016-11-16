@@ -45,8 +45,10 @@ process.on('uncaughtException', function (err) {
 var electron=global.electron=require('electron');
 const ipcRenderer=electron.ipcRenderer;
 var config=require(path.join(__dirname,'loadConfig.js'))(electron,electron.remote.getGlobal('configFile'));
-var redirect=require('console-redirect');
-var logger=redirect(process.stdout,process.stderr);
+if (config.consoleRedirect) {
+  var redirect=require('console-redirect');
+  var logger=redirect(process.stdout,process.stderr);
+}
 var section=require(path.join(__dirname,'section.js'))(config,'webview',{
   electron: electron,
   config: config

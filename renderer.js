@@ -47,8 +47,10 @@ var self=this;
 var path=require('path');
 var electron=global.electron=require('electron');
 var config=require(path.join(__dirname,'loadConfig.js'))(electron,electron.remote.getGlobal('configFile'));
-var redirect=require('console-redirect');
-var logger=redirect(process.stdout,process.stderr);
+if (config.consoleRedirect) {
+  var redirect=require('console-redirect');
+  var logger=redirect(process.stdout,process.stderr);
+}
 var section=require(path.join(__dirname,'section.js'))(config,'renderer',{
   electron: electron,
   config: config
@@ -123,6 +125,7 @@ function webview_setup(id) {
          } else {
            // requested page loaded
            // process webview content
+           wvo.id=webview.id;
            webview.send('processPage',wvo);
          }
          break;
