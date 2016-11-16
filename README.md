@@ -64,7 +64,7 @@ var config={
          2. A module named electron-dataminer-mypage (see npm package electron-dataminer-mypage in electron-dataminer/test/page/)
          3. A module named mypage (figure it out)
        the module should export a function returning the module exports (see page/my-page.js below)
-          
+
        The same rules apply for the "my-api" module declared below
       */
 
@@ -155,7 +155,7 @@ module.exports=function(electron){
           var electron=options.electron;
           var config=options.config;
 
-          // Arguments passed from the renderer in the 
+          // Arguments passed from the renderer in the
           // electron.ipcRenderer.send('ping',...) call below
           // are received in options.args
 
@@ -265,7 +265,7 @@ npm i && bower i && npm start
 
 ## Quickstart
 
-You can either use the example or test directories as starting point or begin a new project with eg:
+You can either use the[ example](https://github.com/alsenet-labs/electron-dataminer/tree/master/example) or [test](https://github.com/alsenet-labs/electron-dataminer/tree/master/test) directories as starting point or begin a new project with eg:
 
 ```bash
 mkdir newProject
@@ -276,7 +276,7 @@ echo "var edm=require('electron-dataminer');" > index.js
 ```
 
 Then create an index.html with a div#webview
-```<div id="webview" />```
+```<div id="webviews" />```
 
 And require jquery and electron-dataminer/renderer.js, eg:
 ```
