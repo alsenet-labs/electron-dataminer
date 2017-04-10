@@ -69,16 +69,35 @@ module.exports=function(config,sectionType,data){
         // foreach id in this section
         for (var sectionId in config[sectionName]) {
           var section=config[sectionName][sectionId];
+//          console.log('SECTIONID',sectionId,sectionType,eventClass,section[sectionType]);
           if (section && section[sectionType] && section[sectionType][eventClass]) {
             var eventHandlers=section[sectionType][eventClass];
             for(var eventName in eventHandlers) {
-              var bind=target.addListener||target.addEventListener||target.on;
+              var bind;
+              switch(sectionId) {
+              case 'session':
+                bind=target.on;
+                break;
+              default:
+                bind=target.addListener||target.addEventListener||target.on;
+                break;
+              }
+//              console.log('BIND',eventName,bind,sectionId,options,target,context,eventName,eventHandlers);
               (function(sectionId,options,target,context,eventName,eventHandlers){
                 bind.call(target,eventName,function(event){
                   var args=Array.prototype.slice.call(arguments,1);
-                  if (args[0][sectionName]!=sectionId) {
-                    return true;
+//                  console.log('EVENT?',eventName,'ARGS START',args,'ARGS END');
+//                  console.log({sectionName: sectionName,sectionId: sectionId,options: options,target: target, context:context, eventName:eventName});
+                  if (args[0][sectionName]) {
+                    // our events
+                    if (args[0][sectionName]!=sectionId) {
+                      return true;
+                    }
+                  } else {
+                    // "native" (electron) events
+                    return eventHandlers[eventName].apply(context||target,Array.prototype.slice.call(arguments));
                   }
+//                  console.log('EVENT!',args,sectionId,options,target,context,eventName);
                   if (options.data) {
                     options.data.args=args;
                   } else {
@@ -87,6 +106,7 @@ module.exports=function(config,sectionType,data){
                     }
                     data.args=args;
                   }
+//                  console.log({DATA: options.data||data});
                   return eventHandlers[eventName].apply(context||target,[event,options.data||data]);
                 });
               })(sectionId,options,target,context,eventName,eventHandlers);
