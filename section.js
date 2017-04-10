@@ -88,13 +88,13 @@ module.exports=function(config,sectionType,data){
                   var args=Array.prototype.slice.call(arguments,1);
 //                  console.log('EVENT?',eventName,'ARGS START',args,'ARGS END');
 //                  console.log({sectionName: sectionName,sectionId: sectionId,options: options,target: target, context:context, eventName:eventName});
-                  if (args[0][sectionName]) {
+                  if (args.length && args[0][sectionName]) {
                     // our events
                     if (args[0][sectionName]!=sectionId) {
                       return true;
                     }
                   } else {
-                    // "native" (electron) events
+                    // "native" (electron) events or events without arguments
                     return eventHandlers[eventName].apply(context||target,Array.prototype.slice.call(arguments));
                   }
 //                  console.log('EVENT!',args,sectionId,options,target,context,eventName);
