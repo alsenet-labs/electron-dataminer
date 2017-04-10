@@ -39,6 +39,8 @@ var ipcMain=electron.ipcMain;
 var configFile=process.argv[2];
 var app=electron.app
 var self=this;
+var Q=require('q');
+
 
 var config=require(path.join(__dirname,'loadConfig.js'))(electron,configFile);
 
@@ -75,11 +77,52 @@ section.initEventListeners({
   eventClass: 'ipcEvents'
 });
 
+var q=Q.defer();
 require(path.join(__dirname,'electron-init.js'))(electron,config,function(mainWindow){
   global.mainWindow=mainWindow;
   if (mainWindow) {
-    app.emit('mainWindow',mainWindow);
-    // and load the index.html of the app.
-    mainWindow.loadURL(config.url || `file://${path.dirname(global.configFile)}/index.html`);
+		q.resolve(mainWindow);
   }
 });
+
+var mainWindow_promise=q.promise.then(function(mainWindow){
+  section.initEventListeners({
+    target: mainWindow.webContents,
+    sectionName: 'api',
+    eventClass: 'webContents',
+    context: mainWindow.webContents
+
+  });
+
+  section.initEventListeners({
+    target: mainWindow.webContents,
+    sectionName: 'pageClass',
+    eventClass: 'webContents',
+    context: mainWindow.webContents
+  });
+
+  section.initEventListeners({
+    target: mainWindow.webContents.session,
+    sectionName: 'api',
+    eventClass: 'session',
+    context: mainWindow.webContents.session
+
+  });
+
+  section.initEventListeners({
+    target: mainWindow.webContents.session,
+    sectionName: 'pageClass',
+    eventClass: 'session',
+    context: mainWindow.webContents.session
+  });
+
+  mainWindow.loadURL(config.url || `file://${path.dirname(global.configFile)}/index.html`);
+  return mainWindow;
+
+});
+
+module.exports={
+	electron: electron,
+	config: config,
+	mainWindow: mainWindow_promise
+};
